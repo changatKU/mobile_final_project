@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(primarySwatch: Colors.lightGreen),
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        appBar: AppBar(
+          title: Text('KU App'),
+        ),
+        body: Image.network(
+          'https://drive.google.com/uc?export=view&id=1yXLay3mbDe4HbBr3lImHOKpCE6uun3Wj',
+          height: 100,
+          width: 100,
+          alignment: Alignment.center,
         ),
       ),
     );
