@@ -37,53 +37,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
-                  'assets/images/app-logo.png',
-                  height: 100,
-                  width: 100,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: createTextField('Name', TextInputType.name, false),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: createTextField(
-                      'Phone number', TextInputType.phone, false),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: createTextField(
-                      'Password', TextInputType.visiblePassword, true),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: createTextField(
-                      'Confirm password', TextInputType.visiblePassword, true),
-                ),
-                ListTile(
-                  title: Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/');
-                        },
-                        child: Text("Back to Login"),
-                      )),
-                      Expanded(
-                          child: TextButton(
-                        onPressed: () {},
-                        child: Text("Register"),
-                      )),
-                    ],
-                  ),
-                )
-              ],
-            ),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Image.asset(
+                'assets/images/app-logo.png',
+                height: 100,
+                width: 100,
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: createTextField('Name', TextInputType.name, false),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                child:
+                    createTextField('Phone number', TextInputType.phone, false),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: createTextField(
+                    'Password', TextInputType.visiblePassword, true),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: createTextField(
+                    'Confirm password', TextInputType.visiblePassword, true),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Register"),
+              ),
+            ]),
           ),
         ));
   }
