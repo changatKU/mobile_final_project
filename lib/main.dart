@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './login.dart';
 import './register.dart';
+import 'createBillEqual.dart';
 
 void main() {
   runApp(Main());
@@ -16,8 +17,9 @@ class Main extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.green),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen()
+        // '/': (context) => LoginScreen(),
+        // '/register': (context) => RegisterScreen(),
+        '/' : (context) => CreateBillEqualScreen()
       },
     );
   }
