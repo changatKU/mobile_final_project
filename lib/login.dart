@@ -10,54 +10,60 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String linkImage =
-      'https://drive.google.com/uc?export=view&id=1yXLay3mbDe4HbBr3lImHOKpCE6uun3Wj';
+  TextField createTextField(
+      String hint_text, TextInputType textInputType, bool isPassword) {
+    return TextField(
+      decoration: InputDecoration(
+        labelText: hint_text,
+        border: OutlineInputBorder(),
+        hintText: hint_text,
+        hintStyle: TextStyle(fontSize: 20),
+      ),
+      keyboardType: textInputType,
+      obscureText: isPassword,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'KU App',
+        appBar: AppBar(
+          title: const Text(
+            'Login',
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              linkImage,
-              width: 100,
-              height: 100,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/app-logo.png',
+                  height: 150,
+                  width: 150,
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  child: createTextField(
+                      'Phone number', TextInputType.phone, false),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  child: createTextField(
+                      'Password', TextInputType.visiblePassword, true),
+                ),
+                TextButton(onPressed: () {}, child: Text('Login')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                    child: const Text('I don\'t have an account')),
+              ],
             ),
-            Container(
-                margin:
-                    const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Username',
-                      hintStyle: TextStyle(fontSize: 20),
-                      focusColor: Colors.green),
-                )),
-            Container(
-                margin:
-                    const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter Password',
-                      hintStyle: TextStyle(fontSize: 20),
-                      focusColor: Colors.green),
-                )),
-            TextButton(onPressed: () {}, child: const Icon(Icons.login)),
-            TextButton(
-                onPressed: () {},
-                child: const Text('I don\'t have an account')),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
