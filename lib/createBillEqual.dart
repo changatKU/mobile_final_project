@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import './model/phoneNumber_model.dart';
+
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
 
@@ -14,6 +16,11 @@ class CreateBillEqualScreen extends StatefulWidget {
 }
 
 class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
+  List<PhoneNumber> phoneNumberList = [];
+  var itemPhoneNumber = '';
+  late String temp;
+  
+  get child => null;
   TextField createBillField(String hint_text, TextInputType textInputType) 
   {
       return TextField(
@@ -25,7 +32,6 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
           fontSize: 10, 
           height: 1.5),
         contentPadding: EdgeInsets.only(left: 70),
-        //textAlign: TextAlign.center
       ),
       keyboardType: textInputType,
     );
@@ -34,8 +40,6 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // List<Widget> widget=<Widget>[];
-
     return Scaffold (
       body: SafeArea(
         child: SingleChildScrollView(
@@ -107,7 +111,7 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
         hintText: 'Type Topic',
         hintStyle: TextStyle(fontSize: 10, height: 2.0),
         contentPadding: EdgeInsets.only(left: 140),
-        //textAlign: TextAlign.center
+
       ),
       keyboardType: TextInputType.text,
     )
@@ -158,30 +162,49 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
           ),
         ),
 
-
-
         Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 70.0),
-          child: Row(
-            children: [
-              Row(children: [
-                Text('Type Phone Number'),
-                // Builder(builder: addMember)
-              ],)
-            ],
-          ),
-          // createBillField('Type Phone Number', TextInputType.text),
-        ),
-
-            Container(child: ElevatedButton (
+          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20),
+          child: Column(
+            children: <Widget>[
+            TextField(
+              decoration: const InputDecoration(
+                hintText: "Type Phone Number",
+                labelText: "Type Phone Number",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40.0),
+                  ),),
+                isDense: true,
+                hintStyle: TextStyle(
+                    fontSize: 10, 
+                    height: 4.5),
+                contentPadding : EdgeInsets.only(left: 70),
+              ),),
+            ElevatedButton (
               onPressed: () {
-                Navigator.push (
-                context, MaterialPageRoute(
-                  builder: (context) => const RegisterScreen() // add list view 
-                  ),);
+                setState(() {
+                  PhoneNumber.add(itemPhoneNumber);
+                });
               },
               child: Text('Add'),
-              ),),
+            ),
+          ],)
+          ),
+
+          // Container(
+          //   height: MediaQuery.of(context).size.height * 0.75,
+          //   child: Column(
+          //     children: [ 
+          //       ListView.builder(itemBuilder: (ctx, index) {
+          //         return Card(
+          //           child: ListTile(
+          //           title: Text(phoneNumberList[index].phoneNumber),
+          //         ),
+          //         );
+          //       }, itemCount: phoneNumberList.length)
+
+          //   ]),
+          // )
             
         ],),),
         
@@ -189,5 +212,7 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
       ); 
   }
 }
+
+
 
 
