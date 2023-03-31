@@ -1,6 +1,6 @@
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'widgets/header_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextField(
       decoration: InputDecoration(
         labelText: hint_text,
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(40.0)),
         hintText: hint_text,
         hintStyle: TextStyle(fontSize: 20),
       ),
@@ -38,6 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+              // Container( 
+              //   child: HeaderWidget()
+              // ),
                 Image.asset(
                   'assets/images/app-logo.png',
                   height: 150,

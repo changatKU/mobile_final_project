@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import './model/phoneNumber_model.dart';
 
+
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
 
@@ -44,7 +45,7 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child:
-            Column(
+            Column (
              crossAxisAlignment: CrossAxisAlignment.start,
              mainAxisSize: MainAxisSize.min, children: //Header
         [
@@ -178,12 +179,12 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
                 hintStyle: TextStyle(
                     fontSize: 10, 
                     height: 4.5),
-                contentPadding : EdgeInsets.only(left: 70),
+                contentPadding : EdgeInsets.only(left: 100),
               ),),
             ElevatedButton (
               onPressed: () {
                 setState(() {
-                  PhoneNumber.add(itemPhoneNumber);
+                  phoneNumberList.add(itemPhoneNumber as PhoneNumber);
                 });
               },
               child: Text('Add'),
@@ -191,20 +192,17 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
           ],)
           ),
 
-          // Container(
-          //   height: MediaQuery.of(context).size.height * 0.75,
-          //   child: Column(
-          //     children: [ 
-          //       ListView.builder(itemBuilder: (ctx, index) {
-          //         return Card(
-          //           child: ListTile(
-          //           title: Text(phoneNumberList[index].phoneNumber),
-          //         ),
-          //         );
-          //       }, itemCount: phoneNumberList.length)
+          Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            child: 
+                ListView.builder(itemBuilder: (ctx, index) {
+                  return Card(
+                    child: ListTile(
+                    title: Text(phoneNumberList[index].phoneNumber),
+                  ),);
+                }, itemCount: phoneNumberList.length)
 
-          //   ]),
-          // )
+          ),
             
         ],),),
         
