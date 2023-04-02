@@ -27,20 +27,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Login',
-          ),
-          centerTitle: true,
-        ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              // Container( 
-              //   child: HeaderWidget()
-              // ),
                 Image.asset(
                   'assets/images/app-logo.png',
                   height: 150,
