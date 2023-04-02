@@ -50,52 +50,41 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = TextEditingController();
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Login',
-          ),
-          centerTitle: true,
-        ),
         body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Container(
-                //   child: HeaderWidget()
-                // ),
-                Image.asset(
-                  'assets/images/app-logo.png',
-                  height: 150,
-                  width: 150,
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                  child: createTextField(
-                      'Phone number', TextInputType.phone, false, phone),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                  child: createTextField('Password',
-                      TextInputType.visiblePassword, true, password),
-                ),
-                TextButton(
-                    onPressed: () async {
-                      if (await fetchData(phone.text)) {
-                        User.phone = phone.text;
-                      }
-                    },
-                    child: Text('Login')),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: const Text('I don\'t have an account')),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/app-logo.png',
+              height: 150,
+              width: 150,
             ),
-          ),
-        ));
+            Container(
+              margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+              child: createTextField(
+                  'Phone number', TextInputType.phone, false, phone),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+              child: createTextField(
+                  'Password', TextInputType.visiblePassword, true, password),
+            ),
+            TextButton(
+                onPressed: () async {
+                  if (await fetchData(phone.text)) {
+                    User.phone = phone.text;
+                  }
+                },
+                child: Text('Login')),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: const Text('I don\'t have an account')),
+          ],
+        ),
+      ),
+    ));
   }
 }
