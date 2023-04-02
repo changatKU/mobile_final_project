@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import './model/user.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
 import 'widgets/header_widget.dart';
@@ -13,8 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextField createTextField(
-      String hint_text, TextInputType textInputType, bool isPassword) {
+  TextField createTextField(String hint_text, TextInputType textInputType,
+      bool isPassword, TextEditingController myController) {
     return TextField(
       decoration: InputDecoration(
         labelText: hint_text,
@@ -24,11 +26,29 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       keyboardType: textInputType,
       obscureText: isPassword,
+      controller: myController,
     );
+  }
+
+  final String apiUrl = 'http://10.0.2.2/api/users';
+
+  Future<bool> fetchData(String phone) async {
+    final response = await http.get(Uri.parse(apiUrl + '/' + phone));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print(data);
+      return true;
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final phone = TextEditingController();
+    final password = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -53,15 +73,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin:
                       const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
                   child: createTextField(
-                      'Phone number', TextInputType.phone, false),
+                      'Phone number', TextInputType.phone, false, phone),
                 ),
                 Container(
                   margin:
                       const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-                  child: createTextField(
-                      'Password', TextInputType.visiblePassword, true),
+                  child: createTextField('Password',
+                      TextInputType.visiblePassword, true, password),
                 ),
-                TextButton(onPressed: () {}, child: Text('Login')),
+                TextButton(
+                    onPressed: () async {
+                      if (await fetchData(phone.text)) {
+                        User.phone = phone.text;
+                      }
+                    },
+                    child: Text('Login')),
                 TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/register');
