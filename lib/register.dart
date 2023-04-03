@@ -90,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextButton(
                 onPressed: () {
                   if (password.text == confirm_password.text) {
-                    // makePostRequest(name.text, phone.text, password.text);
+                    makePostRequest(name.text, phone.text, password.text);
                     name.clear();
                     phone.clear();
                     password.clear();

@@ -4,6 +4,7 @@ import './register.dart';
 import 'createBillEqual.dart';
 import 'splash_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
+import './postFeed.dart';
 
 void main() {
   runApp(Main());
@@ -20,13 +21,15 @@ class Main extends StatelessWidget {
       theme: ThemeData(
           primaryColor: _primaryColor,
           scaffoldBackgroundColor: Colors.grey.shade100,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
               .copyWith(secondary: _accentColor)),
       initialRoute: '/',
-      home: SplashScreen(title: 'KhungTung'),
+      home: LoginScreen(),
+      // home: PostFeedScreen(),
       routes: {
         '/register': (context) => RegisterScreen(),
-        '/bill-equal': (context) => CreateBillEqualScreen()
+        '/bill-equal': (context) => CreateBillEqualScreen(),
+        '/postfeed': (context) => PostFeedScreen()
       },
     );
   }

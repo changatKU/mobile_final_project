@@ -32,12 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final String apiUrl = 'http://10.0.2.2/api/users';
 
-  Future<bool> fetchData(String phone) async {
+  Future<bool> fetchData(String phone, String password) async {
     final response = await http.get(Uri.parse(apiUrl + '/' + phone));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       print(data);
-      return true;
+      print(data[0]['password']);
+      if (password == data[0]['password']) {
+        return true;
+      }
+      return false;
     } else {
       print('Request failed with status: ${response.statusCode}.');
       return false;
@@ -72,8 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextButton(
                 onPressed: () async {
-                  if (await fetchData(phone.text)) {
+                  if (await fetchData(phone.text, password.text)) {
                     User.phone = phone.text;
+                    Navigator.pushNamed(context, '/bill-equal');
                   }
                 },
                 child: Text('Login')),

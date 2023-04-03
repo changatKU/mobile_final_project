@@ -1,13 +1,13 @@
 import 'dart:ffi';
 
 import 'package:final_project/main.dart';
+import 'package:final_project/model/user.dart';
 import 'package:final_project/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-
-import './model/phoneNumber_model.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
@@ -17,200 +17,190 @@ class CreateBillEqualScreen extends StatefulWidget {
 }
 
 class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
-  List<PhoneNumber> phoneNumberList = [];
-  var itemPhoneNumber = '';
-  late String temp;
-  
-  get child => null;
-  TextField createBillField(String hint_text, TextInputType textInputType) 
-  {
-      return TextField(
+  final phone = TextEditingController();
+  final topic = TextEditingController();
+  final amount = TextEditingController();
+  final bank = TextEditingController();
+  final bank_number = TextEditingController();
+  List<String> phoneNumberList = [];
+  Map<String, dynamic> nameList = {};
+
+  TextField createTextField(String hint_text, TextInputType textInputType,
+      TextEditingController textEditingController) {
+    return TextField(
       decoration: InputDecoration(
         labelText: hint_text,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(40.0)),
         hintText: hint_text,
-        hintStyle: TextStyle(
-          fontSize: 10, 
-          height: 1.5),
-        contentPadding: EdgeInsets.only(left: 70),
+        hintStyle: TextStyle(fontSize: 10, height: 1.5),
       ),
       keyboardType: textInputType,
+      controller: textEditingController,
+      obscureText: false,
     );
   }
 
+  final String apiUrl = 'http://10.0.2.2/api/';
+  Future<void> fetchData(String phone) async {
+    final response = await http.get(Uri.parse(apiUrl + 'users/' + phone));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      nameList.addAll({phone: data[0]["name"]});
+      print(nameList);
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  void sendJsonData(
+      String _phone,
+      String _topic,
+      double _amount,
+      String _bank_account,
+      String _bank_account_number,
+      List<Map<String, dynamic>> _members) async {
+    final uri = Uri.parse(apiUrl + 'membersOfBill/');
+    final headers = {'Content-Type': 'application/json'};
+    final json = jsonEncode({
+      "phone": _phone,
+      "topic": _topic,
+      "amount": _amount,
+      "bank_account": _bank_account,
+      "bank_account_number": _bank_account_number,
+      "members": _members
+    });
+
+    final response = await http.post(uri, headers: headers, body: json);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child:
-            Column (
-             crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisSize: MainAxisSize.min, children: //Header
-        [
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: 
-          [
+    return Scaffold(
+        body: Center(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
             Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton (
-              onPressed: () {
-                Navigator.push (
-                context, MaterialPageRoute(
-                builder: (context) => const RegisterScreen() // change route
-                ),);
-              }, 
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children:
-            [
-              Icon(
-                Icons.arrow_back_outlined,
-                size: 15.0),
-                Padding(padding: EdgeInsets.only(left: 6.0)),
-                Text('Back'),
-              ],),),),
-          
-            Padding(padding: EdgeInsets.only(right: 150.0)),
-
-            Container(
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children:
-            [
-              Icon(
-              Icons.account_circle,
-              size:20.0
-              ),
-
-           Padding(padding: EdgeInsets.only(left: 6.0)),
-           Text('User', style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-           ),),],))
-           
-          ],), // heder ending
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 115.0),
-          child: Text('Create Bill', style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold, 
-          )),
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0),
-          child: Text('Topic', style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600, 
-          )),
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-          child: TextField(
-      decoration: InputDecoration(
-        labelText: 'Type Topic',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(40.0)),
-        hintText: 'Type Topic',
-        hintStyle: TextStyle(fontSize: 10, height: 2.0),
-        contentPadding: EdgeInsets.only(left: 140),
-
-      ),
-      keyboardType: TextInputType.text,
-    )
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0),
-          child: Text('Amount', style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600, 
-          )),
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-          child: createBillField('Type Amount (e.g. 500 Baht)', TextInputType.number)
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0),
-          child: Text('Bank Account', style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600, 
-          )),
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-          child: createBillField('Type Bank Account Number', TextInputType.text)
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0),
-          child: Row(
-            children: [
-              Row(children: [
-                Text('Member', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),),
-                Text(' (Seach by Phone Number)', style: TextStyle(
-                  fontSize: 12,
-                  height: 1.5,
-                  fontWeight: FontWeight.w600
-                )),
-              ],)
-            ],
-          ),
-        ),
-
-        Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20),
-          child: Column(
-            children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(
-                hintText: "Type Phone Number",
-                labelText: "Type Phone Number",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40.0),
-                  ),),
-                isDense: true,
-                hintStyle: TextStyle(
-                    fontSize: 10, 
-                    height: 4.5),
-                contentPadding : EdgeInsets.only(left: 100),
-              ),),
-            ElevatedButton (
-              onPressed: () {
-                setState(() {
-                  phoneNumberList.add(itemPhoneNumber as PhoneNumber);
-                });
-              },
-              child: Text('Add'),
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              alignment: Alignment.centerLeft,
+              child: const Text('Topic',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  )),
             ),
-          ],)
-          ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child:
+                  createTextField('eg. Food, Drink', TextInputType.name, topic),
+            ),
+            // Container(
+            //   margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            //   alignment: Alignment.centerLeft,
+            //   child: const Text('Amount',
+            //       style: TextStyle(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       )),
+            // ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: createTextField('eg. 1000.50', TextInputType.name, amount),
+            ),
+            // Container(
+            //   margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            //   alignment: Alignment.centerLeft,
+            //   child: const Text('Bank Name',
+            //       style: TextStyle(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       )),
+            // ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: createTextField(
+                  'eg. SCB, Prompay', TextInputType.number, bank),
+            ),
+            // Container(
+            //   margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            //   alignment: Alignment.centerLeft,
+            //   child: const Text('Bank Account ID',
+            //       style: TextStyle(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       )),
+            // ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: createTextField(
+                  'eg. 2354536789', TextInputType.number, bank_number),
+            ),
+            // Container(
+            //   margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            //   alignment: Alignment.centerLeft,
+            //   child: const Text('Member',
+            //       style: TextStyle(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w600,
+            //       )),
+            // ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: createTextField(
+                  'Enter phone number', TextInputType.phone, phone),
+            ),
+            TextButton(
+                onPressed: () {
+                  setState(() {
+                    phoneNumberList.add(phone.text);
+                  });
+                },
+                child: const Text("Add")),
+            Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: ListView.builder(
+                  itemCount: phoneNumberList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    fetchData(phoneNumberList[index]);
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text(phoneNumberList[index]),
+                        subtitle: Text(phoneNumberList[index]),
+                        onTap: () {
+                          // Handle item tap
+                        },
+                      ),
+                    );
+                  },
+                )),
+            TextButton(
+                onPressed: () {
+                  print("Hello");
 
-          Container(
-            height: MediaQuery.of(context).size.height * 0.75,
-            child: 
-                ListView.builder(itemBuilder: (ctx, index) {
-                  return Card(
-                    child: ListTile(
-                    title: Text(phoneNumberList[index].phoneNumber),
-                  ),);
-                }, itemCount: phoneNumberList.length)
+                  double total = double.parse(amount.text);
+                  List<Map<String, dynamic>> members = [];
+                  for (int i = 0; i < phoneNumberList.length; i++) {
+                    members.add({
+                      "phone": phoneNumberList[i],
+                      "amount": (total / (phoneNumberList.length + 1))
+                    });
+                  }
+                  print(members);
 
-          ),
-            
-        ],),),
-        
+                  sendJsonData(User.phone, topic.text, total, bank.text,
+                      bank_number.text, members);
+                },
+                child: Text('Create'))
+          ],
+        ),
       ),
-      ); 
+    ));
   }
 }
-
-
-
-
