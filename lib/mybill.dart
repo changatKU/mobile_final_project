@@ -55,7 +55,8 @@ class _MyBillScreenState extends State<MyBillScreen> {
                       builder: (context) => const BillScreen() // change route
                 ),);
                   }, child: const Text('Back'),
-                  style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder())),
                   ),
                 
                 Container(

@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './models/api.dart';
 import './login.dart';
+import './bill.dart';
 
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
@@ -93,7 +94,13 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/bill');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const BillScreen() // change route
+                          ),
+                    );
                   },
                   child: const Text('Back'),
                   style: ElevatedButton.styleFrom(shape: StadiumBorder())),

@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './models/api.dart';
+import './bill.dart';
 
 class FriendBillScreen extends StatefulWidget {
   const FriendBillScreen({super.key});
@@ -38,8 +39,26 @@ class _FriendBillScreenState extends State<FriendBillScreen> {
   Widget build(BuildContext context) {
     fetchData(User.phone);
     return Scaffold(
-        body: Center(
-            child: Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(16.0),
+                    child: 
+                    ElevatedButton(
+                    onPressed: () {
+                      Navigator.push (
+                      context, MaterialPageRoute(
+                      builder: (context) => const BillScreen() // change route
+                ),);
+                  }, child: const Text('Back'),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder())),
+
+              ),
+              Container(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: ListView.builder(
                   itemCount: bills.length,
@@ -70,6 +89,11 @@ class _FriendBillScreenState extends State<FriendBillScreen> {
                       );
                     }
                   },
-                ))));
+                )
+
+              )
+            ],
+          )
+        )));
   }
 }
