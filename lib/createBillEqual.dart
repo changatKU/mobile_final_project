@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import './model/phoneNumber_model.dart';
+import 'models/phoneNumber_model.dart';
 
 
 class CreateBillEqualScreen extends StatefulWidget {
@@ -62,13 +62,14 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
                 ),);
               }, 
             child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children:
+            
             [
               Icon(
                 Icons.arrow_back_outlined,
                 size: 15.0),
                 Padding(padding: EdgeInsets.only(left: 6.0)),
                 Text('Back'),
-              ],),),),
+            ],),),),
           
             Padding(padding: EdgeInsets.only(right: 150.0)),
 
@@ -148,7 +149,7 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
           margin: EdgeInsets.only(top: 20.0, left: 20.0),
           child: Row(
             children: [
-              Row(children: [
+              Row(children: const [
                 Text('Member', style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -164,11 +165,11 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
         ),
 
         Container(
-          margin: EdgeInsets.only(top: 20.0, left: 20.0, right: 20),
+          margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20),
           child: Column(
             children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(
+            const TextField(
+              decoration: InputDecoration(
                 hintText: "Type Phone Number",
                 labelText: "Type Phone Number",
                 border: OutlineInputBorder(
