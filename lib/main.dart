@@ -1,3 +1,5 @@
+import 'package:final_project/friendBill.dart';
+import 'package:final_project/mySubBill.dart';
 import 'package:flutter/material.dart';
 import './login.dart';
 import './register.dart';
@@ -7,6 +9,7 @@ import 'package:hexcolor/hexcolor.dart';
 import './postFeed.dart';
 import 'bill.dart';
 import 'mybill.dart';
+import './mySubBill.dart';
 
 void main() {
   runApp(Main());
@@ -27,13 +30,16 @@ class Main extends StatelessWidget {
           //     .copyWith(secondary: _accentColor)
       ),
       initialRoute: '/',
-      home: BillScreen(),
+      home: LoginScreen(),
       // home: PostFeedScreen(),
       routes: {
         '/register': (context) => RegisterScreen(),
         '/bill-equal': (context) => CreateBillEqualScreen(),
         '/postfeed': (context) => PostFeedScreen(),
-        '/mybill': (context) => MyBillScreen()
+        '/mybill': (context) => MyBillScreen(),
+        '/my-sub-bill': (context) => MySubBill(),
+        '/friendBill': (context) => FriendBillScreen(),
+        '/bill': (context) => BillScreen()
       },
     );
   }
