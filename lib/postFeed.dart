@@ -48,48 +48,65 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: 
               [
-              Row(
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.all(16.0),
-                    child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push (
-                      context, MaterialPageRoute(
-                      builder: (context) => const LoginScreen() // change route
-                ),);
-                  }, child: const Text('Log out'))),
+              // Row(
+              //   children: [
+                //   Container(
+                //     alignment: Alignment.topLeft,
+                //     padding: const EdgeInsets.all(16.0),
+                //     child: 
+                //     ElevatedButton(
+                //     onPressed: () {
+                //       Navigator.push (
+                //       context, MaterialPageRoute(
+                //       builder: (context) => const LoginScreen() // change route
+                // ),);
+                //   }, child: const Text('Log out'),
+                //   style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+                //   ),
 
-                  const Padding(padding: EdgeInsets.only(right: 150.0)),
+              //     const Padding(padding: EdgeInsets.only(right: 150.0)),
 
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.account_circle,
-                        size: 20.0
-                    ),
+                  // Row(
+                  //   children: const [
+                  //     Icon(
+                  //       Icons.account_circle,
+                  //       size: 20.0
+                  //   ),
                   
-                  Padding(padding: EdgeInsets.only(left: 3.0)),
-                  Text('User', style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ))],
-                  ),
-              ],),
+                  // Padding(padding: EdgeInsets.only(left: 3.0)),
+                  // Text('User', style: TextStyle(
+                  //   fontSize: 20.0,
+                  //   fontWeight: FontWeight.bold,
+                  // ))
+                  // ],
+                  // ),
+              // ],),
 
+              Container(
+                margin: EdgeInsets.only(left: 100),
+                child: const Text('Your Feed',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
+                  )),
+              ),
+
+              
               Row(
                 children: [
+                  Padding(padding: EdgeInsets.only(left: 120.0)),
                   ElevatedButton(
+                    
                     onPressed: () {
                       Navigator.push (
                         context, MaterialPageRoute(
                           builder: (context) => const PostFeedScreen()
                     ),);
                     }, child: const Text('Feed'),
+                    style: ElevatedButton.styleFrom(shape: StadiumBorder())
                   ),
 
-
+                  Padding(padding: EdgeInsets.only(left: 15.0)),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push (
@@ -97,11 +114,19 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                           builder: (context) => const CreateBillEqualScreen()
                     ),);
                     }, child: const Text('Bill'),
+                    style: ElevatedButton.styleFrom(shape: StadiumBorder())
                   ),
 
               ],),
+              // Container(
+              //   child: const Text('Feed',
+              //     style: TextStyle(
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.w600,
+              //     )),
+              // ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.6,
                 child: 
                 ListView.builder(
                   itemCount: postList.length,
@@ -133,12 +158,29 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                   }),
               ),
             Container(
-              margin: const EdgeInsets.only(left: 250.0, right: 20),
+              margin: const EdgeInsets.only(left: 280.0, right: 20),
               child: ElevatedButton (
                   onPressed: () => {
                     showPostFeedDialog()
-            }, child: const Text('Add'),),
-            )
+            }, child: const Text('Add Feed'),
+            style: ElevatedButton.styleFrom(shape: StadiumBorder())
+            ),
+            
+            
+            ),
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.all(16.0),
+                    child: 
+                    ElevatedButton(
+                    onPressed: () {
+                      Navigator.push (
+                      context, MaterialPageRoute(
+                      builder: (context) => const LoginScreen() // change route
+                ),);
+                  }, child: const Text('Log out'),
+                  style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+                  ),            
             ]
 
             ),

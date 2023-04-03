@@ -59,7 +59,7 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
           widget.addPost(post);
           Navigator.of(context).pop();
         }, 
-        child: Text('Add Post'),
+        child: Text('Add Feed'),
         ),
       ],
       )
