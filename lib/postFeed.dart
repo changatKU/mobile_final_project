@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'models/postFeed.dart';
 import 'package:final_project/login.dart';
 import './createBillEqual.dart';
+import './bill.dart';
 
 void main() {
   runApp(MaterialApp(home: PostFeedScreen()));
@@ -83,12 +84,13 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
               // ],),
 
               Container(
-                margin: EdgeInsets.only(left: 100),
-                child: const Text('Your Feed',
+                child: Center(
+                  child: const Text('Khuntung\'s Feed',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 35,
                     fontWeight: FontWeight.w600,
                   )),
+                )      
               ),
 
               
@@ -103,18 +105,25 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                           builder: (context) => const PostFeedScreen()
                     ),);
                     }, child: const Text('Feed'),
-                    style: ElevatedButton.styleFrom(shape: StadiumBorder())
-                  ),
+                    style: ElevatedButton.styleFrom (
+                      shape: StadiumBorder(),
+                      primary: Colors.green,
+                      shadowColor: Colors.black,
+                  ),),
 
                   Padding(padding: EdgeInsets.only(left: 15.0)),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push (
                         context, MaterialPageRoute(
-                          builder: (context) => const CreateBillEqualScreen()
+                          builder: (context) => const BillScreen()
                     ),);
                     }, child: const Text('Bill'),
-                    style: ElevatedButton.styleFrom(shape: StadiumBorder())
+                    style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      primary: Colors.green,
+                      shadowColor: Colors.black,
+                      )
                   ),
 
               ],),
@@ -137,7 +146,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                           postList[index].topic,
                           style: const TextStyle(
                             fontSize: 22,
-                            color: Colors.blueAccent,
+                            color: Colors.green,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -145,7 +154,7 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                           postList[index].location,
                           style: const TextStyle(
                             fontSize: 20,
-                            color: Colors.blueGrey,
+                            color: Colors.black26,
                           ),
                         ),
                         trailing: Text(postList[index].description,

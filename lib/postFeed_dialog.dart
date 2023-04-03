@@ -35,17 +35,17 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
     var descriptionController = TextEditingController();
 
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.only(top: 40),
       height: 350,
       width: 400,
       child: Column(
         children: [
         Text(
-          'Add Post',
+          'Add Feed',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 32,
-            color: Colors.black87,
+            color: Color.fromARGB(255, 1, 116, 60),
           )
         ),
         buildTextfield('Topic', topicController),
@@ -59,7 +59,9 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
           widget.addPost(post);
           Navigator.of(context).pop();
         }, 
-        child: Text('Add Feed'),
+        child: Text('Add'),
+        style: ElevatedButton.styleFrom(shape: StadiumBorder(),
+        primary: Colors.green),
         ),
       ],
       )

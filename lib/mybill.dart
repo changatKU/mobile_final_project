@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './models/api.dart';
+import './bill.dart';
 
 class MyBillScreen extends StatefulWidget {
   const MyBillScreen({super.key});
@@ -37,16 +38,40 @@ class _MyBillScreenState extends State<MyBillScreen> {
   Widget build(BuildContext context) {
     fetchData("0844057805");
     return Scaffold(
-        body: Center(
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: ListView.builder(
-                  itemCount: bills.length,
-                  itemBuilder: (BuildContext context, int index) {
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+             children: [
+                Container(
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(16.0),
+                    child: 
+                    ElevatedButton(
+                    onPressed: () {
+                      Navigator.push (
+                      context, MaterialPageRoute(
+                      builder: (context) => const BillScreen() // change route
+                ),);
+                  }, child: const Text('Back'),
+                  style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+                  ),
+                
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: ListView.builder(
+                    itemCount: bills.length,
+                    itemBuilder: (BuildContext context, int index) {
                     return Card(
                       child: ListTile(
                         leading: Icon(Icons.person),
-                        title: Text(bills[index]["topic"]),
+                        title: Text(
+                          bills[index]["topic"],
+                          style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         subtitle: Text(bills[index]["topic"]),
                         onTap: () {
                           // Handle item tap
@@ -54,6 +79,9 @@ class _MyBillScreenState extends State<MyBillScreen> {
                       ),
                     );
                   },
-                ))));
+                ),
+                ),
+          ],)
+        )));
   }
 }

@@ -21,10 +21,11 @@ class Main extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       theme: ThemeData(
-          primaryColor: _primaryColor,
-          scaffoldBackgroundColor: Colors.grey.shade100,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-              .copyWith(secondary: _accentColor)),
+          primaryColor: Colors.green,
+          // scaffoldBackgroundColor: Colors.grey.shade100,
+          // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+          //     .copyWith(secondary: _accentColor)
+      ),
       initialRoute: '/',
       home: BillScreen(),
       // home: PostFeedScreen(),
