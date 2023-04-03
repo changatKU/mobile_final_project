@@ -22,7 +22,11 @@ class _BillScreenState extends State<BillScreen> {
                 Navigator.pushNamed(context, "/mybill");
               },
               child: Text("My Bill")),
-          TextButton(onPressed: () {}, child: Text("Friend Bill"))
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/friendBill");
+              },
+              child: Text("Friend Bill"))
         ],
       ),
     ));

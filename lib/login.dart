@@ -40,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
       print(data);
       print(data[0]['password']);
       if (password == data[0]['password']) {
+        User.phone = phone;
         return true;
       }
       return false;
@@ -78,8 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
                 onPressed: () async {
                   if (await fetchData(phone.text, password.text)) {
-                    User.phone = phone.text;
-                    Navigator.pushNamed(context, '/bill-equal');
+                    Navigator.pushNamed(context, '/bill');
                   }
                 },
                 child: Text('Login')),

@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './models/api.dart';
+import './models/bill.dart';
+import './models/user.dart';
 
 class MyBillScreen extends StatefulWidget {
   const MyBillScreen({super.key});
@@ -35,7 +37,7 @@ class _MyBillScreenState extends State<MyBillScreen> {
 
   @override
   Widget build(BuildContext context) {
-    fetchData("0844057805");
+    fetchData(User.phone);
     return Scaffold(
         body: Center(
             child: Container(
@@ -49,7 +51,9 @@ class _MyBillScreenState extends State<MyBillScreen> {
                         title: Text(bills[index]["topic"]),
                         subtitle: Text(bills[index]["topic"]),
                         onTap: () {
-                          // Handle item tap
+                          Bill.bill_id = bills[index]["id"];
+                          print(Bill.bill_id);
+                          Navigator.pushNamed(context, "/my-sub-bill");
                         },
                       ),
                     );
