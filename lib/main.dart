@@ -5,6 +5,8 @@ import 'createBillEqual.dart';
 import 'splash_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 import './postFeed.dart';
+import 'bill.dart';
+import 'mybill.dart';
 
 void main() {
   runApp(Main());
@@ -24,12 +26,13 @@ class Main extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
               .copyWith(secondary: _accentColor)),
       initialRoute: '/',
-      home: LoginScreen(),
+      home: BillScreen(),
       // home: PostFeedScreen(),
       routes: {
         '/register': (context) => RegisterScreen(),
         '/bill-equal': (context) => CreateBillEqualScreen(),
-        '/postfeed': (context) => PostFeedScreen()
+        '/postfeed': (context) => PostFeedScreen(),
+        '/mybill': (context) => MyBillScreen()
       },
     );
   }

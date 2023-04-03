@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final String apiUrl = Api.apiUrl + 'api/users/';
 
   Future<bool> fetchData(String phone, String password) async {
-    final response = await http.get(Uri.parse(apiUrl + '/' + phone));
+    final response = await http.get(Uri.parse(apiUrl + phone));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       print(data);
