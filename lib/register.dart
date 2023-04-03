@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import './model/api.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -28,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  final String apiUrl = 'http://10.0.2.2/api/users';
+  final String apiUrl = Api.apiUrl + 'api/users/';
 
   Future<void> makePostRequest(
       String name, String phone, String password) async {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './model/user.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import './model/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'widgets/header_widget.dart';
 
@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  final String apiUrl = 'http://10.0.2.2/api/users';
+  final String apiUrl = Api.apiUrl + 'api/users/';
 
   Future<bool> fetchData(String phone, String password) async {
     final response = await http.get(Uri.parse(apiUrl + '/' + phone));

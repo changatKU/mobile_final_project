@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './model/api.dart';
 
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
@@ -40,7 +41,7 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
     );
   }
 
-  final String apiUrl = 'http://10.0.2.2/api/';
+  final String apiUrl = Api.apiUrl + 'api/';
   Future<void> fetchData(String phone) async {
     final response = await http.get(Uri.parse(apiUrl + 'users/' + phone));
     if (response.statusCode == 200) {
