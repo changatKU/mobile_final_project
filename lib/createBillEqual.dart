@@ -9,6 +9,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './models/api.dart';
+import './login.dart';
 
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});
@@ -88,7 +89,21 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(16.0),
+                    child: 
+                    ElevatedButton(
+                    onPressed: () {
+                      Navigator.push (
+                      context, MaterialPageRoute(
+                      builder: (context) => const LoginScreen() // change route
+                ),);
+                  }, child: const Text('Back'),
+                  style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+            ),
+
+            Container(
+              margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
               alignment: Alignment.centerLeft,
               child: const Text('Topic',
                   style: TextStyle(
