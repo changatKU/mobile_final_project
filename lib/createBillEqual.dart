@@ -89,16 +89,13 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
         child: Column(
           children: [
             Container(
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.all(16.0),
-                    child: 
-                    ElevatedButton(
-                    onPressed: () {
-                      Navigator.push (
-                      context, MaterialPageRoute(
-                      builder: (context) => const LoginScreen() // change route
-                ),);
-                  }, child: const Text('Back'),
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/bill');
+                  },
+                  child: const Text('Back'),
                   style: ElevatedButton.styleFrom(shape: StadiumBorder())),
             ),
 
