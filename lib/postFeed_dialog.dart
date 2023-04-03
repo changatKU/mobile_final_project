@@ -1,29 +1,28 @@
+import 'package:final_project/postFeed.dart';
 import 'package:flutter/material.dart';
-import 'model/postFeed.dart';
+import './postFeed.dart';
+import 'models/postFeed.dart';
 
 class AddPostFeedDialog extends StatefulWidget {
   final Function(Post) addPost;
   AddPostFeedDialog(this.addPost);
-    
+
+
   @override
   State<AddPostFeedDialog> createState() => _AddPostFeedDialogState();
 }
 
 class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
-
-
-
   @override
   Widget build(BuildContext context) {
-
     Widget buildTextfield(String hint, TextEditingController controller) {
       return Container(
         margin: EdgeInsets.all(4),
         child: TextField(
           decoration: InputDecoration(
             labelText: hint,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black45)
+            border: OutlineInputBorder(borderSide: BorderSide(
+                color: Colors.black45)
             ),
           ),
           controller: controller
@@ -34,9 +33,10 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
     var topicController = TextEditingController();
     var locationController = TextEditingController();
     var descriptionController = TextEditingController();
+
     return Container(
       padding: EdgeInsets.all(8),
-      height: 300,
+      height: 350,
       width: 400,
       child: Column(
         children: [
@@ -45,7 +45,7 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 32,
-            color: Colors.black12,
+            color: Colors.black87,
           )
         ),
         buildTextfield('Topic', topicController),
@@ -57,6 +57,7 @@ class _AddPostFeedDialogState extends State<AddPostFeedDialog> {
           descriptionController.text);
 
           widget.addPost(post);
+          Navigator.of(context).pop();
         }, 
         child: Text('Add Post'),
         ),
