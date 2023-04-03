@@ -85,33 +85,67 @@ class _BillScreenState extends State<BillScreen> {
                       shadowColor: Colors.black,
                   )
                 ),
+              ),
+              Padding(padding: EdgeInsets.only(left: 15.0)),
               ElevatedButton(
-                  onPressed: () {}, 
-                   child: const Text("Friend\'s Bill"),
-                    style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      fixedSize: Size.fromWidth(200),
-                      primary: Colors.lightGreen,
-                      shadowColor: Colors.black,
-                  )),],)                          
-            ),
-
-
-            Container(
-              margin: const EdgeInsets.only(left: 280.0, right: 20, top: 250),
-              child: ElevatedButton (
-                  onPressed: () => {
+                  onPressed: () {
                     Navigator.push(
-                      context, MaterialPageRoute(
-                        builder: (context) => const CreateBillEqualScreen())
-                    )
-            }, child: const Text('Add Bill'),
-            style: ElevatedButton.styleFrom(shape: StadiumBorder())
-            ),
-
-            )],
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BillScreen()),
+                    );
+                  },
+                  child: const Text('Bill'),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    primary: Colors.green,
+                    shadowColor: Colors.black,
+                  )),
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(top: 220)),
+          Center(
+              child: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/mybill");
+                  },
+                  child: const Text("My Bill"),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    fixedSize: Size.fromWidth(200),
+                    primary: Colors.lightGreen,
+                    shadowColor: Colors.black,
+                  )),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/friendBill');
+                  },
+                  child: const Text("Friend\'s Bill"),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    fixedSize: Size.fromWidth(200),
+                    primary: Colors.lightGreen,
+                    shadowColor: Colors.black,
+                  )),
+            ],
+          )),
+          Container(
+            margin: const EdgeInsets.only(left: 280.0, right: 20, top: 250),
+            child: ElevatedButton(
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const CreateBillEqualScreen()))
+                    },
+                child: const Text('Add Bill'),
+                style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+          )
+        ],
       ),
-      ))
-    );
+    )));
   }
 }

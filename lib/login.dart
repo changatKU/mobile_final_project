@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
                 onPressed: () async {
                   if (await fetchData(phone.text, password.text)) {
-                    Navigator.pushNamed(context, '/bill');
+                    Navigator.pushNamed(context, '/postfeed');
                   }
                 },
                 child: Text('Login')),
