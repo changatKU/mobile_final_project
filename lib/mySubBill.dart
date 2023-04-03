@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './models/api.dart';
 import './models/bill.dart';
+import './mybill.dart';
 
 class MySubBill extends StatefulWidget {
   const MySubBill({super.key});
@@ -39,9 +40,26 @@ class _MySubBillState extends State<MySubBill> {
   Widget build(BuildContext context) {
     fetchData();
     return Scaffold(
-        body: Center(
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+      body: SafeArea(child: SingleChildScrollView(
+        child: Column(
+          children: [
+              Container(
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(16.0),
+                    child: 
+                    ElevatedButton(
+                    onPressed: () {
+                      Navigator.push (
+                      context, MaterialPageRoute(
+                      builder: (context) => const MyBillScreen() // change route
+                ),);
+                  }, child: const Text('Back'),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder())),
+                  ),
+
+            Container(
+                height: MediaQuery.of(context).size.height * 0.75,
                 child: ListView.builder(
                   itemCount: bills.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -71,6 +89,11 @@ class _MySubBillState extends State<MySubBill> {
                       );
                     }
                   },
-                ))));
+                ))                  
+
+          ],
+        ),
+      )),
+    );
   }
 }

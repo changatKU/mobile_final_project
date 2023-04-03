@@ -49,40 +49,6 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: 
               [
-              // Row(
-              //   children: [
-                //   Container(
-                //     alignment: Alignment.topLeft,
-                //     padding: const EdgeInsets.all(16.0),
-                //     child: 
-                //     ElevatedButton(
-                //     onPressed: () {
-                //       Navigator.push (
-                //       context, MaterialPageRoute(
-                //       builder: (context) => const LoginScreen() // change route
-                // ),);
-                //   }, child: const Text('Log out'),
-                //   style: ElevatedButton.styleFrom(shape: StadiumBorder())),
-                //   ),
-
-              //     const Padding(padding: EdgeInsets.only(right: 150.0)),
-
-                  // Row(
-                  //   children: const [
-                  //     Icon(
-                  //       Icons.account_circle,
-                  //       size: 20.0
-                  //   ),
-                  
-                  // Padding(padding: EdgeInsets.only(left: 3.0)),
-                  // Text('User', style: TextStyle(
-                  //   fontSize: 20.0,
-                  //   fontWeight: FontWeight.bold,
-                  // ))
-                  // ],
-                  // ),
-              // ],),
-
               Container(
                 child: Center(
                   child: const Text('Khuntung\'s Feed',
@@ -127,15 +93,8 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                   ),
 
               ],),
-              // Container(
-              //   child: const Text('Feed',
-              //     style: TextStyle(
-              //       fontSize: 20,
-              //       fontWeight: FontWeight.w600,
-              //     )),
-              // ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.75,
                 child: 
                 ListView.builder(
                   itemCount: postList.length,
@@ -172,24 +131,12 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
                   onPressed: () => {
                     showPostFeedDialog()
             }, child: const Text('Add Feed'),
-            style: ElevatedButton.styleFrom(shape: StadiumBorder())
+            style: ElevatedButton.styleFrom(
+              shape: StadiumBorder())
             ),
             
             
-            ),
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.all(16.0),
-                    child: 
-                    ElevatedButton(
-                    onPressed: () {
-                      Navigator.push (
-                      context, MaterialPageRoute(
-                      builder: (context) => const LoginScreen() // change route
-                ),);
-                  }, child: const Text('Log out'),
-                  style: ElevatedButton.styleFrom(shape: StadiumBorder())),
-                  ),            
+            ),           
             ]
 
             ),

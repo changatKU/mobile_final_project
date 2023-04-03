@@ -30,8 +30,7 @@ class _BillScreenState extends State<BillScreen> {
                     fontSize: 35,
                     fontWeight: FontWeight.w600,
                   )),
-                )
-                
+                )                
               ),
 
               Row(
