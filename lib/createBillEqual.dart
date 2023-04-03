@@ -144,8 +144,8 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
             // ),
             Container(
               margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: createTextField(
-                  'eg. SCB, Prompay', TextInputType.number, bank),
+              child:
+                  createTextField('eg. SCB, Prompay', TextInputType.name, bank),
             ),
             // Container(
             //   margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -177,9 +177,12 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
             ),
             TextButton(
                 onPressed: () {
-                  setState(() {
-                    phoneNumberList.add(phone.text);
-                  });
+                  if (phone.text != User.phone &&
+                      !phoneNumberList.contains(phone.text)) {
+                    setState(() {
+                      phoneNumberList.add(phone.text);
+                    });
+                  }
                 },
                 child: const Text("Add")),
             Container(
@@ -189,13 +192,31 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     fetchData(phoneNumberList[index]);
                     return Card(
-                      child: ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text(phoneNumberList[index]),
-                        subtitle: Text(phoneNumberList[index]),
-                        onTap: () {
-                          // Handle item tap
-                        },
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.person),
+                            title: Text(phoneNumberList[index]),
+                            // subtitle: Text(phoneNumberList[index]),
+                            onTap: () {
+                              // Handle item tap
+                            },
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                var value = phoneNumberList[index];
+                                phoneNumberList.remove(value);
+                                setState(() {});
+                              },
+                              child: Text(
+                                "remove",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ))
+                        ],
                       ),
                     );
                   },
@@ -216,6 +237,14 @@ class _CreateBillEqualScreenState extends State<CreateBillEqualScreen> {
 
                   sendJsonData(User.phone, topic.text, total, bank.text,
                       bank_number.text, members);
+
+                  topic.clear();
+                  amount.clear();
+                  bank.clear();
+                  bank_number.clear();
+                  phone.clear();
+                  phoneNumberList.clear();
+                  setState(() {});
                 },
                 child: Text('Create'))
           ],

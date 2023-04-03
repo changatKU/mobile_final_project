@@ -39,33 +39,36 @@ class _MyBillScreenState extends State<MyBillScreen> {
   @override
   Widget build(BuildContext context) {
     fetchData(User.phone);
+    // setState(() {});
     return Scaffold(
-        body: SafeArea(
+      body: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-             children: [
-                Container(
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.all(16.0),
-                    child: 
-                    ElevatedButton(
-                    onPressed: () {
-                      Navigator.push (
-                      context, MaterialPageRoute(
-                      builder: (context) => const BillScreen() // change route
-                ),);
-                  }, child: const Text('Back'),
-                  style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder())),
-                  ),
-                
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  child: ListView.builder(
-                    itemCount: bills.length,
-                    itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child: ListTile(
+              child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BillScreen() // change route
+                        ),
+                  );
+                },
+                child: const Text('Back'),
+                style: ElevatedButton.styleFrom(shape: StadiumBorder())),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            child: ListView.builder(
+              itemCount: bills.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Column(
+                    children: [
+                      ListTile(
                         leading: Icon(Icons.person),
                         title: Text(
                           bills[index]["topic"],
@@ -75,18 +78,34 @@ class _MyBillScreenState extends State<MyBillScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        subtitle: Text(bills[index]["topic"]),
+                        subtitle: Text(
+                          bills[index]["amount"].toString() + " Bath.",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         onTap: () {
                           Bill.bill_id = bills[index]["id"];
                           print(Bill.bill_id);
                           Navigator.pushNamed(context, "/my-sub-bill");
                         },
                       ),
-                    );
-                  },
-                ),
-                ),
-          ],)
-        )));
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: Icon(Icons.refresh),
+          ),
+        ],
+      ))),
+    );
   }
 }
