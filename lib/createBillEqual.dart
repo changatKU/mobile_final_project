@@ -1,14 +1,14 @@
 import 'dart:ffi';
 
 import 'package:final_project/main.dart';
-import 'package:final_project/model/user.dart';
+import 'package:final_project/models/user.dart';
 import 'package:final_project/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './model/api.dart';
+import './models/api.dart';
 
 class CreateBillEqualScreen extends StatefulWidget {
   const CreateBillEqualScreen({super.key});

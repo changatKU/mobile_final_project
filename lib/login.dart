@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import './model/user.dart';
+import './models/user.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import './model/api.dart';
+import './models/api.dart';
 import 'package:flutter/cupertino.dart';
 import 'widgets/header_widget.dart';
 
