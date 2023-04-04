@@ -4,5 +4,5 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class User {
-  static String phone = "";
+  static String phone = "0844057805";
 }

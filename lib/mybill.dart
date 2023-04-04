@@ -79,7 +79,7 @@ class _MyBillScreenState extends State<MyBillScreen> {
                           ),
                         ),
                         subtitle: Text(
-                          bills[index]["amount"].toString() + " Bath.",
+                          bills[index]["amount"].toString() + " ฿",
                           style: const TextStyle(
                             fontSize: 18,
                             color: Colors.grey,

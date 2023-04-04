@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
       obscureText: isPassword,
       controller: myController,
     );
-    // 
+    //
   }
 
   final String apiUrl = Api.apiUrl + 'api/users/';
@@ -80,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
                 onPressed: () async {
                   if (await fetchData(phone.text, password.text)) {
+                    print("hello");
                     Navigator.pushNamed(context, '/postfeed');
                   }
                 },
